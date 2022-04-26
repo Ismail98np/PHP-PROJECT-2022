@@ -33,4 +33,28 @@ This project will have 3 entites:
 
 The Driving instructor and Student enties will have general C.R.U.D functionality revolving around lessons.
 
-As of now I will attempt to add this funcitonailty and hopefully later down the line I can try to add more complex functionailty by manipulating the data that is stored in the database. But as of now this is the base functionailyty of the project
+As of now I will attempt to add this funcitonailty and hopefully later down the line I can try to add more complex functionailty by manipulating the data that is stored in the database. But as of now this is the base functionailyty of the project.
+
+# Entity Description
+
+As mentioned above this project will have 3 entites here are the diagrams of these entites as to how i plan to model them in the project.
+
+As PHP does not explicit types I created these diagrams to help clarify what types the fields in each entity
+
+## Driving Instructor
+
+<p align="center">
+<img src="readMe_images/DI.png" width="500">
+<p>
+
+## Student
+
+<p align="center">
+<img src="readMe_images/Student.png" width="500">
+<p>
+
+## Lesson
+
+<p align="center">
+<img src="readMe_images/lesson.png" width="500">
+<p>
