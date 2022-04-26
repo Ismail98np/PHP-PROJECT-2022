@@ -22,3 +22,15 @@ This website will follow the use case of a driving instructor website. It will i
 * **Twig** - Twig is a template engine for the PHP programming language
 
 * **BootSwatch** - Themes used for bootstrap.css
+
+# Implementation
+
+This project will have 3 entites:
+
+* **Driving Instrucor** - This will model a driving instructor.
+* **Student** - This will model a driving student.
+* **Lesson** - This will model a lesson.
+
+The Driving instructor and Student enties will have general C.R.U.D functionality revolving around lessons.
+
+As of now I will attempt to add this funcitonailty and hopefully later down the line I can try to add more complex functionailty by manipulating the data that is stored in the database. But as of now this is the base functionailyty of the project
