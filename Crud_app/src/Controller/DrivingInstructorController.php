@@ -120,4 +120,25 @@ class DrivingInstructorController extends AbstractController
             'form' => $form->createView()
           ));
     }
+
+
+      /** 
+     * @Route("/di/delete/{id}")
+     * @Method({"DELETE"})
+     */
+    public function delete(ManagerRegistry $doctrine, Request $request, int $id)
+    {
+
+      // get driving instructor
+      $driving_instructor = $doctrine->getRepository(DrivingInstructor::class)->find($id);
+
+
+      $entityManager = $doctrine->getManager();
+      $entityManager->remove($driving_instructor);
+      $entityManager->flush();
+
+      $response = new Response();
+      $response->send();
+
+    }
 }

@@ -5,7 +5,7 @@
 {% block body %}
 <h1>driving instructor</h1>
 {% if instructors%}
-<table class="table table-striped">
+<table id="table" class="table table-striped">
     <thead>
       <tr>
         <th>instructor</th>
@@ -18,7 +18,10 @@
           <td>{{ x.name }}</td>
           <td>
             <a href="/instructor/{{x.id}}" class="btn btn-dark">Show</a>
-            </td>
+          </td>
+          <td>
+            <a href="#" class="btn btn-danger delete-instructor" data-id={{x.id}}>delete</a>
+          </td>
         </tr>
       {% endfor %}
     </tbody>
@@ -26,4 +29,8 @@
 {% else %}
   <p>No instrutors to display</p>
 {% endif %}
+{% endblock %}
+
+{%block javascripts%}
+<script src ="/js/main.js"></script>
 {% endblock %}
