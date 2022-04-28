@@ -17,7 +17,7 @@ use App\Entity\DrivingInstructor;
 class DrivingInstructorController extends AbstractController
 {
     /**
-     * @Route("/", name="home")
+     * @Route("/drivinginstructors", name="homed")
      * @Method({"GET"})
      */
     public function index(ManagerRegistry $doctrine)

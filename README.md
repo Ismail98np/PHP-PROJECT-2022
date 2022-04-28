@@ -88,5 +88,5 @@ I created the following static pages:
 * Get started driving
 * The EDT lessons
 * About us
-* Contcat us
+* contact us
 * Prices
