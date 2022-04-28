@@ -1,6 +1,10 @@
 # PHP-PROJECT-2022
 A full stack website for my final assignment of the module Web Framework Development
 
+<p align="center">
+<img src="readMe_images/home.png" width="500">
+<p>
+
 # Details
 
 The application is a full stack website constructed using PHP and Symfony that will connect to a MySQL database which will then be tested using PHPUnit.
