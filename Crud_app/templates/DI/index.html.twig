@@ -4,4 +4,26 @@
 
 {% block body %}
 <h1>driving instructor</h1>
-{% endblock body %}
+{% if instructors%}
+<table class="table table-striped">
+    <thead>
+      <tr>
+        <th>instructor</th>
+        <th>instructor actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for x in instructors %}
+        <tr>
+          <td>{{ x }}</td>
+          <td>
+            <a href="/instructor/1" class="btn btn-dark">Show</a>
+            </td>
+        </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+{% else %}
+  <p>No articles to display</p>
+{% endif %}
+{% endblock %}

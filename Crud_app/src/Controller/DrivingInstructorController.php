@@ -19,7 +19,12 @@ class DrivingInstructorController extends AbstractController
     public function index()
     {
         //return new Response("<html><body>this webpage is working fine</body></html>");
-        return $this->render("DI/index.html.twig");
+
+        //mock array of driving instructors
+        $driving_instructors =["DI_1","D1_2"];
+
+
+        return $this->render("DI/index.html.twig",array('instructors' => $driving_instructors));
     }
     /** 
     
