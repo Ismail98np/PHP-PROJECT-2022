@@ -8,7 +8,7 @@ use Doctrine\Persistence\ManagerRegistry;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Symfony\Component\Routing\Annotation\Route;
 
-use App\Entity\County;
+use App\Entity\DrivingInstructor;
 
 class DrivingInstructorController extends AbstractController
 {
@@ -30,23 +30,30 @@ class DrivingInstructorController extends AbstractController
     
      * @Route("/save")
      */
-    /*
+    
     public function save(ManagerRegistry $doctrine) :Response
     {
+        //Using entity manager
         $entityManager = $doctrine->getManager();
 
-        $product = new County();
-        $product->setName('new one');
+        //Object instantiation
+        $instructor = new DrivingInstructor();
+
+        //Setting object fields
+        $instructor->setName('Ismail Omotoso');
+        $instructor->setEmail('IO@gmail.com');
+        $instructor->setPhoneNumber('0123456789');
+        $instructor->setExperience(2);
 
 
-        // tell Doctrine you want to (eventually) save the Product (no queries yet)
-        $entityManager->persist($product);
+        //Persist to DB
+        $entityManager->persist($instructor);
 
-        // actually executes the queries (i.e. the INSERT query)
+        //execute query to save object
         $entityManager->flush();
 
-        return new Response($product->getId());
+        return new Response('saved a new driving instructor the name of them is '.$instructor->getName());
 
-    }*/
+    }
     
 }
