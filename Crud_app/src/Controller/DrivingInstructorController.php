@@ -16,9 +16,10 @@ class DrivingInstructorController extends AbstractController
      * @Route("/")
      * @Method({"GET"})
      */
-    public function index(): Response
+    public function index()
     {
-        return new Response("<html><body>this webpage is working fine</body></html>");
+        //return new Response("<html><body>this webpage is working fine</body></html>");
+        return $this->render("DI/index.html.twig");
     }
     /** 
     
