@@ -1,0 +1,70 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Home{% endblock %}
+
+{% block body %}
+<style>
+    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
+    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
+    .vertical-center {  margin: 100; position:  absolute;left: 50%;}
+</style>
+
+<div class="example-wrapper">
+    <h1>How much will this cost me!</h1>
+    <br>
+
+
+
+    <br>
+
+    <p>If you are TUD student you get a 10% discount off of any of our services!<p>
+
+
+    <br>
+
+        
+        
+</div>
+
+<div class="container-lg">
+    <div class="row">
+        <div class="col">
+         <div class="card-deck">
+        <div class="card text-white bg-info mb-3" style="max-width: 20rem;">
+            <div class="card-body">
+              <h4 class="card-title">Single Lessons</h4>
+              <p class="card-text">Normal Price: $50</p>
+              <p class="card-text">Discount Price: $45</p>
+              <a href="/bookLesson">Book a lesson </a>
+            </div>
+      </div>
+
+      <div class="row">
+        <div class="col">
+         <div class="card-deck">
+        <div class="card text-white bg-danger mb-3" style="max-width: 20rem;">
+            <div class="card-body">
+                <h4 class="card-title">12 Lessons Bundle</h4>
+                <p class="card-text">Normal Price: $400</p>
+                <p class="card-text">Discount Price: $360</p>
+                <a href="/bookLesson">Book a lesson </a>
+            </div>
+      </div>
+
+      <div class="row">
+        <div class="col">
+         <div class="card-deck">
+        <div class="card text-white bg-warning mb-3" style="max-width: 20rem;">
+            <div class="card-body">
+                <h4 class="card-title">Pretest Lessons</h4>
+                <p class="card-text">Normal Price: $80</p>
+                <p class="card-text">Discount Price: $72</p>
+                <a href="/bookLesson">Book a lesson </a>
+            </div>
+      </div>
+
+
+    </div>
+    <a href="/" class="btn btn-info vertical-center" role="button">Go Back</a>
+    
+{% endblock %}
