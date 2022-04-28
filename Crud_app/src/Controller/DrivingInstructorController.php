@@ -16,15 +16,29 @@ class DrivingInstructorController extends AbstractController
      * @Route("/")
      * @Method({"GET"})
      */
-    public function index()
+    public function index(ManagerRegistry $doctrine)
     {
         //return new Response("<html><body>this webpage is working fine</body></html>");
 
-        //mock array of driving instructors
-        $driving_instructors =["DI_1","D1_2"];
+        // array of driving instructors
+        $driving_instructors = $doctrine->getRepository(DrivingInstructor::class)->findAll();
 
 
         return $this->render("DI/index.html.twig",array('instructors' => $driving_instructors));
+    }
+
+    /**
+     * @Route("/instructor/{id}", name="instructor")
+     * @Method({"GET"})
+     */
+    public function showInstructor(ManagerRegistry $doctrine, int $id)
+    {
+
+        // array of driving instructors
+        $driving_instructor = $doctrine->getRepository(DrivingInstructor::class)->find($id);
+
+
+        return $this->render("DI/show.html.twig",array('instructor' => $driving_instructor));
     }
     /** 
     
@@ -40,7 +54,7 @@ class DrivingInstructorController extends AbstractController
         $instructor = new DrivingInstructor();
 
         //Setting object fields
-        $instructor->setName('Ismail Omotoso');
+        $instructor->setName('Ismail Omotoso 2');
         $instructor->setEmail('IO@gmail.com');
         $instructor->setPhoneNumber('0123456789');
         $instructor->setExperience(2);

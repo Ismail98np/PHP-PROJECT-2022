@@ -15,9 +15,9 @@
     <tbody>
       {% for x in instructors %}
         <tr>
-          <td>{{ x }}</td>
+          <td>{{ x.name }}</td>
           <td>
-            <a href="/instructor/1" class="btn btn-dark">Show</a>
+            <a href="/instructor/{{x.id}}" class="btn btn-dark">Show</a>
             </td>
         </tr>
       {% endfor %}
