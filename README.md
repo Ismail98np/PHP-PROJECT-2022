@@ -1,6 +1,10 @@
 # PHP-PROJECT-2022
 A full stack website for my final assignment of the module Web Framework Development
 
+<p align="center">
+<img src="readMe_images/home.png" width="500">
+<p>
+
 # Details
 
 The application is a full stack website constructed using PHP and Symfony that will connect to a MySQL database which will then be tested using PHPUnit.
@@ -68,4 +72,23 @@ The first thing that I wanted to implement for this project was the basic crud f
 
 The first entity tat i wanted to create was the driving instructor as it was the most basic entity that did not need it's realtionships defined at the start.
 
-This was all done within the **1_CRUD_LESSON** branch
+This was all done within the **1_CRUD_LESSON** branhc
+
+* **1. CRUD Functionailty**
+
+The first thing that I wanted to implement for this project was the basic crud functionaility for one of the entities that i was going to be creating. to do this for one entity would me that i just have to repeat the steps for the remaining entites.
+
+The first entity tat i wanted to create was the driving instructor as it was the most basic entity that did not need it's realtionships defined at the start.
+
+This was all done within the **1_CRUD_LESSON** branhc
+
+* **2. Static Pages**
+
+The next set of steps was to deliever teh static pages of the application using a default controller class to add some context to the website.
+
+I created the following static pages:
+
+* Home Page
+* Get started driving
+* The EDT lessons
+* Prices
