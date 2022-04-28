@@ -4,16 +4,20 @@ namespace App\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpFoundation\Request;
 use Doctrine\Persistence\ManagerRegistry;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
+
 
 use App\Entity\DrivingInstructor;
 
 class DrivingInstructorController extends AbstractController
 {
     /**
-     * @Route("/")
+     * @Route("/", name="home")
      * @Method({"GET"})
      */
     public function index(ManagerRegistry $doctrine)
@@ -69,5 +73,51 @@ class DrivingInstructorController extends AbstractController
         return new Response('saved a new driving instructor the name of them is '.$instructor->getName());
 
     }
-    
+
+    /** 
+     * @Route("/di/new")
+     * @Method({"GET","POST"})
+     */
+    public function newInstructor(ManagerRegistry $doctrine, Request $request)
+    {
+        
+
+        $form = $this->createFormBuilder()
+        ->add('name', TextType::class, array('attr' => array('class' => 'form-control')))
+        ->add('email', TextType::class, array(
+          'required' => false,
+          'attr' => array('class' => 'form-control')
+        ))
+        ->add('Phone', TextType::class, array('attr' => array('class' => 'form-control')))
+        ->add('save', SubmitType::class, array(
+          'label' => 'Create',
+          'attr' => array('class' => 'btn btn-primary mt-3')
+        ))
+        ->getForm();
+
+
+        $form->handleRequest($request);
+
+        if($form->isSubmitted() && $form->isValid()) {
+          $form_data = $form->getData();
+          $instructor = new DrivingInstructor();
+          $instructor->setName($form_data["name"]);
+          $instructor->setEmail($form_data["email"]);
+          $instructor->setPhoneNumber($form_data["Phone"]);
+          $instructor->setExperience(0);
+
+
+          $entityManager = $doctrine->getManager();
+          $entityManager->persist($instructor);
+          $entityManager->flush();
+
+          return $this->redirectToRoute('home');
+        }
+
+        
+
+        return $this->render('DI/new.html.twig', array(
+            'form' => $form->createView()
+          ));
+    }
 }
