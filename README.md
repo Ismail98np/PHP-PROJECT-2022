@@ -58,3 +58,14 @@ As PHP does not explicit types I created these diagrams to help clarify what typ
 <p align="center">
 <img src="readMe_images/lesson.png" width="500">
 <p>
+
+# Approach
+
+
+* **1. CRUD Functionailty**
+
+The first thing that I wanted to implement for this project was the basic crud functionaility for one of the entities that i was going to be creating. to do this for one entity would me that i just have to repeat the steps for the remaining entites.
+
+The first entity tat i wanted to create was the driving instructor as it was the most basic entity that did not need it's realtionships defined at the start.
+
+This was all done within the **1_CRUD_LESSON** branhc
