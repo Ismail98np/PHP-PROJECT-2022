@@ -4,12 +4,13 @@ namespace App\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\Routing\Annotation\Route;
 use Doctrine\Persistence\ManagerRegistry;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
+use Symfony\Component\Routing\Annotation\Route;
+
 use App\Entity\County;
 
-class DefaultController extends AbstractController
+class DrivingInstructorController extends AbstractController
 {
     /**
      * @Route("/")
@@ -17,7 +18,7 @@ class DefaultController extends AbstractController
      */
     public function index(): Response
     {
-        return new Response("<html><body>this webpage is working</body></html>");
+        return new Response("<html><body>this webpage is working fine</body></html>");
     }
     /** 
     
