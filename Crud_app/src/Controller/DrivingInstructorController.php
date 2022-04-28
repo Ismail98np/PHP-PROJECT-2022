@@ -122,6 +122,47 @@ class DrivingInstructorController extends AbstractController
     }
 
 
+       /** 
+     * @Route("/di/edit/{id}", name="edit_instructor")
+     * @Method({"GET","POST"})
+     */
+    public function editInstructor(ManagerRegistry $doctrine, Request $request , int $id)
+    {
+        
+      $driving_instructor = $doctrine->getRepository(DrivingInstructor::class)->find($id);
+
+        $form = $this->createFormBuilder($driving_instructor)
+        ->add('name', TextType::class, array('attr' => array('class' => 'form-control')))
+        ->add('email', TextType::class, array(
+          'required' => false,
+          'attr' => array('class' => 'form-control')
+        ))
+        ->add('Phone_number', TextType::class, array('attr' => array('class' => 'form-control')))
+        ->add('save', SubmitType::class, array(
+          'label' => 'Update',
+          'attr' => array('class' => 'btn btn-primary mt-3')
+        ))
+        ->getForm();
+
+
+        $form->handleRequest($request);
+
+        if($form->isSubmitted() && $form->isValid()) {
+
+          $entityManager = $doctrine->getManager();
+          $entityManager->flush();
+
+          return $this->redirectToRoute('home');
+        }
+
+        
+
+        return $this->render('DI/edit.html.twig', array(
+            'form' => $form->createView()
+          ));
+    }
+
+
       /** 
      * @Route("/di/delete/{id}")
      * @Method({"DELETE"})
