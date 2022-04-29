@@ -95,7 +95,7 @@ class StudentController extends AbstractController
 
         
 
-        return $this->render('DI/new.html.twig', array(
+        return $this->render('student/new.html.twig', array(
             'form' => $form->createView()
           ));
     }
