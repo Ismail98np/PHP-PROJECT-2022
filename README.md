@@ -92,7 +92,7 @@ I created the following static pages:
 * The EDT lessons
 * Prices
 
-* **3.Create reamining entities**
+* **3.Create remaning entities**
 
 Since I had the completed the teh dirivng instructor entity i decided to create the remaining entites, which was student and lesson. i also decided to add a new entity called admin which would act almost as a super user for the application being able to execute Crud operations on every other entity.
 
