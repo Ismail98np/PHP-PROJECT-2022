@@ -1,5 +1,5 @@
 <?php
-
+/*
 namespace App\DataFixtures;
 
 use Doctrine\Bundle\FixturesBundle\Fixture;
@@ -9,17 +9,12 @@ use App\Entity\DrivingInstructor;
 use App\Entity\Lesson;
 use App\Entity\Student;
 
-class AdminFixtures extends Fixture
+class AppFixtures extends Fixture
 {
     public function load(ObjectManager $manager): void
     {
-        //Create super user
-         $admin = new Admin();
-         $admin->setUsername("ismail");
-         $admin->setPassword("1234");
-         $admin->setRole("ROLE_ADMIN");
 
-/*
+
         $lesson = new Lesson();
         $lesson->setLocation("ismail");
         $lesson->setDate("1234");
@@ -81,10 +76,9 @@ $manager->persist($lesson);
 $manager->persist($lesson1);
 $manager->persist($student);
 $manager->persist($instructor1);
-*/
 
-$manager->persist($admin);
 
         $manager->flush();
     }
 }
+*/

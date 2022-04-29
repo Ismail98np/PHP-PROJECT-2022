@@ -34,7 +34,6 @@ This project will have 3 entites:
 * **Driving Instrucor** - This will model a driving instructor.
 * **Student** - This will model a driving student.
 * **Lesson** - This will model a lesson.
-* **Admin** - This will model a site admin.
 
 The Driving instructor and Student enties will have general C.R.U.D functionality revolving around lessons.
 
@@ -64,11 +63,6 @@ As PHP does not explicit types I created these diagrams to help clarify what typ
 <img src="readMe_images/lesson.png" width="500">
 <p>
 
-## Admin
-
-<p align="center">
-<img src="readMe_images/admin.png" width="500">
-<p>
 
 # Approach
 
