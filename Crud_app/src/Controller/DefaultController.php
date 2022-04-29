@@ -10,7 +10,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 class DefaultController extends AbstractController
 {
     /**
-     * @Route("/", name="home")
+     * @Route("/", name="default")
      * @Method({"GET"})
      */
     public function index(): Response

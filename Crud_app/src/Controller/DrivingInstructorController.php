@@ -10,17 +10,34 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
+use Symfony\Component\Form\Extension\Core\Type\NumberType;
 
 
 use App\Entity\DrivingInstructor;
 
 class DrivingInstructorController extends AbstractController
 {
-    /**
-     * @Route("/drivinginstructors", name="homed")
+
+      /**
+     * @Route("/drivinginstructors", name="home")
      * @Method({"GET"})
      */
     public function index(ManagerRegistry $doctrine)
+    {
+
+        // array of driving instructors
+        $driving_instructors = $doctrine->getRepository(DrivingInstructor::class)->findAll();
+
+
+        return $this->render("DI/home.html.twig",);
+    }
+
+
+    /**
+     * @Route("/viewInstrcutors", name="viewInstrcutors")
+     * @Method({"GET"})
+     */
+    public function index1(ManagerRegistry $doctrine)
     {
         //return new Response("<html><body>this webpage is working fine</body></html>");
 
@@ -28,7 +45,7 @@ class DrivingInstructorController extends AbstractController
         $driving_instructors = $doctrine->getRepository(DrivingInstructor::class)->findAll();
 
 
-        return $this->render("DI/index.html.twig",array('instructors' => $driving_instructors));
+        return $this->render("DI/viewInstructors.html.twig",array('instructors' => $driving_instructors));
     }
 
     /**
@@ -89,6 +106,7 @@ class DrivingInstructorController extends AbstractController
           'attr' => array('class' => 'form-control')
         ))
         ->add('Phone', TextType::class, array('attr' => array('class' => 'form-control')))
+        ->add('Experience', NumberType::class, array('attr' => array('class' => 'form-control')))
         ->add('save', SubmitType::class, array(
           'label' => 'Create',
           'attr' => array('class' => 'btn btn-primary mt-3')
@@ -104,7 +122,7 @@ class DrivingInstructorController extends AbstractController
           $instructor->setName($form_data["name"]);
           $instructor->setEmail($form_data["email"]);
           $instructor->setPhoneNumber($form_data["Phone"]);
-          $instructor->setExperience(0);
+          $instructor->setExperience($form_data["Experience"]);
 
 
           $entityManager = $doctrine->getManager();
@@ -119,6 +137,21 @@ class DrivingInstructorController extends AbstractController
         return $this->render('DI/new.html.twig', array(
             'form' => $form->createView()
           ));
+    }
+
+                /**
+     * @Route("/editInstructors", name="editInstructors")
+     * @Method({"GET"})
+     */
+    public function editStudents(ManagerRegistry $doctrine)
+    {
+       
+
+        // array of driving instructors
+        $driving_instructor = $doctrine->getRepository(DrivingInstructor::class)->findAll();
+
+
+        return $this->render("DI/editInstructors.html.twig",array('instructors' => $driving_instructor));
     }
 
 
@@ -138,6 +171,7 @@ class DrivingInstructorController extends AbstractController
           'attr' => array('class' => 'form-control')
         ))
         ->add('Phone_number', TextType::class, array('attr' => array('class' => 'form-control')))
+        ->add('Experience', NumberType::class, array('attr' => array('class' => 'form-control')))
         ->add('save', SubmitType::class, array(
           'label' => 'Update',
           'attr' => array('class' => 'btn btn-primary mt-3')
@@ -152,7 +186,7 @@ class DrivingInstructorController extends AbstractController
           $entityManager = $doctrine->getManager();
           $entityManager->flush();
 
-          return $this->redirectToRoute('home');
+          return $this->redirectToRoute('editInstructors');
         }
 
         
