@@ -90,7 +90,7 @@ class StudentController extends AbstractController
           $entityManager->flush();
 
           
-          return $this->redirectToRoute('studentHome');
+          return $this->redirectToRoute('allStudents');
         }
 
         
@@ -101,7 +101,7 @@ class StudentController extends AbstractController
     }
 
         /**
-     * @Route("/viewStudents", name="allStudents")
+     * @Route("/viewStudent", name="allStudents")
      * @Method({"GET"})
      */
     public function viewStudents(ManagerRegistry $doctrine)
@@ -114,5 +114,63 @@ class StudentController extends AbstractController
 
         return $this->render("student/allStudent.html.twig",array('students' => $students));
     }
+
+
+            /**
+     * @Route("/editStudents", name="editStudents")
+     * @Method({"GET"})
+     */
+    public function editStudents(ManagerRegistry $doctrine)
+    {
+       
+
+        // array of driving instructors
+        $students = $doctrine->getRepository(Student::class)->findAll();
+
+
+        return $this->render("student/editStudents.html.twig",array('students' => $students));
+    }
+
+           /** 
+     * @Route("/student/edit/{id}", name="edit_student")
+     * @Method({"GET","POST"})
+     */
+    public function editStudent(ManagerRegistry $doctrine, Request $request , int $id)
+    {
+        
+      $driving_instructor = $doctrine->getRepository(Student::class)->find($id);
+
+        $form = $this->createFormBuilder($driving_instructor)
+        ->add('name', TextType::class, array('attr' => array('class' => 'form-control')))
+        ->add('email', TextType::class, array(
+          'required' => false,
+          'attr' => array('class' => 'form-control')
+        ))
+        ->add('phone', TextType::class, array('attr' => array('class' => 'form-control')))
+        ->add('save', SubmitType::class, array(
+          'label' => 'Update',
+          'attr' => array('class' => 'btn btn-primary mt-3')
+        ))
+        ->getForm();
+
+
+        $form->handleRequest($request);
+
+        if($form->isSubmitted() && $form->isValid()) {
+
+          $entityManager = $doctrine->getManager();
+          $entityManager->flush();
+
+          return $this->redirectToRoute('editStudents');
+        }
+
+        
+
+        return $this->render('student/edit.html.twig', array(
+            'form' => $form->createView()
+          ));
+    }
+
+    
 }
 

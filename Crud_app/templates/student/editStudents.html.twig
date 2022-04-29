@@ -1,0 +1,43 @@
+{%extends 'base.html.twig' %}
+
+ {% block title %}Edit students{% endblock title %}
+
+{% block body %}
+<h1>Edit Students</h1>
+{% if students%}
+<table id="table" class="table table-striped">
+    <thead>
+      <tr>
+        <th>Student Name</th>
+        <th>Student Email</th>
+        <th>Student Phone</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+        {% for x in students %}
+        <tr>
+          <td>{{ x.name }}</td>
+          <td>{{ x.email }}</td>
+          <td>{{ x.phone }}</td>
+          <td>
+            <a href="/student/edit/{{x.id}}" class="btn btn-primary">edit</a>
+            <a href="#" class="btn btn-danger delete-instructor" data-id={{x.id}}>delete</a>
+          </td>
+          <td>
+
+          </td>
+        </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+  <a href="/student" class="btn btn-info vertical-center" role="button">Go Back</a>
+{% else %}
+  <p>No instrutors to display</p>
+  <a href="/student" class="btn btn-info vertical-center" role="button">Go Back</a>
+{% endif %}
+{% endblock %}
+
+{%block javascripts%}
+<script src ="/js/main.js"></script>
+{% endblock %}
