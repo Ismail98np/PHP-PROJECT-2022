@@ -24,9 +24,6 @@ class Student
     #[ORM\Column(type: 'string', length: 255)]
     private $phone;
 
-    #[ORM\Column(type: 'string', length: 255)]
-    private $password;
-
     #[ORM\OneToMany(mappedBy: 'student', targetEntity: Lesson::class)]
     private $lesson;
 
@@ -72,18 +69,6 @@ class Student
     public function setPhone(string $phone): self
     {
         $this->phone = $phone;
-
-        return $this;
-    }
-
-    public function getPassword(): ?string
-    {
-        return $this->password;
-    }
-
-    public function setPassword(string $password): self
-    {
-        $this->password = $password;
 
         return $this;
     }
