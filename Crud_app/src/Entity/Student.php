@@ -2,13 +2,13 @@
 
 namespace App\Entity;
 
-use App\Repository\DrivingInstructorRepository;
+use App\Repository\StudentRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
-#[ORM\Entity(repositoryClass: DrivingInstructorRepository::class)]
-class DrivingInstructor
+#[ORM\Entity(repositoryClass: StudentRepository::class)]
+class Student
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
@@ -16,26 +16,24 @@ class DrivingInstructor
     private $id;
 
     #[ORM\Column(type: 'string', length: 255)]
-    private $Name;
+    private $name;
 
     #[ORM\Column(type: 'string', length: 255)]
     private $email;
 
     #[ORM\Column(type: 'string', length: 255)]
-    private $phone_number;
+    private $phone;
 
-    #[ORM\Column(type: 'integer')]
-    private $experience;
+    #[ORM\Column(type: 'string', length: 255)]
+    private $password;
 
-    #[ORM\OneToMany(mappedBy: 'drivingInstructor', targetEntity: Lesson::class)]
+    #[ORM\OneToMany(mappedBy: 'student', targetEntity: Lesson::class)]
     private $lesson;
 
     public function __construct()
     {
         $this->lesson = new ArrayCollection();
     }
-
-    //Getters and setters
 
     public function getId(): ?int
     {
@@ -44,12 +42,12 @@ class DrivingInstructor
 
     public function getName(): ?string
     {
-        return $this->Name;
+        return $this->name;
     }
 
-    public function setName(string $Name): self
+    public function setName(string $name): self
     {
-        $this->Name = $Name;
+        $this->name = $name;
 
         return $this;
     }
@@ -66,26 +64,26 @@ class DrivingInstructor
         return $this;
     }
 
-    public function getPhoneNumber(): ?string
+    public function getPhone(): ?string
     {
-        return $this->phone_number;
+        return $this->phone;
     }
 
-    public function setPhoneNumber(string $phone_number): self
+    public function setPhone(string $phone): self
     {
-        $this->phone_number = $phone_number;
+        $this->phone = $phone;
 
         return $this;
     }
 
-    public function getExperience(): ?int
+    public function getPassword(): ?string
     {
-        return $this->experience;
+        return $this->password;
     }
 
-    public function setExperience(int $experience): self
+    public function setPassword(string $password): self
     {
-        $this->experience = $experience;
+        $this->password = $password;
 
         return $this;
     }
@@ -102,7 +100,7 @@ class DrivingInstructor
     {
         if (!$this->lesson->contains($lesson)) {
             $this->lesson[] = $lesson;
-            $lesson->setDrivingInstructor($this);
+            $lesson->setStudent($this);
         }
 
         return $this;
@@ -112,8 +110,8 @@ class DrivingInstructor
     {
         if ($this->lesson->removeElement($lesson)) {
             // set the owning side to null (unless already changed)
-            if ($lesson->getDrivingInstructor() === $this) {
-                $lesson->setDrivingInstructor(null);
+            if ($lesson->getStudent() === $this) {
+                $lesson->setStudent(null);
             }
         }
 
