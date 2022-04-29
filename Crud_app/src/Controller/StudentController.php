@@ -89,8 +89,8 @@ class StudentController extends AbstractController
           $entityManager->persist($student);
           $entityManager->flush();
 
-          //come back and change to view students
-          return $this->redirectToRoute('home');
+          
+          return $this->redirectToRoute('studentHome');
         }
 
         
@@ -98,6 +98,21 @@ class StudentController extends AbstractController
         return $this->render('student/new.html.twig', array(
             'form' => $form->createView()
           ));
+    }
+
+        /**
+     * @Route("/viewStudents", name="allStudents")
+     * @Method({"GET"})
+     */
+    public function viewStudents(ManagerRegistry $doctrine)
+    {
+       
+
+        // array of driving instructors
+        $students = $doctrine->getRepository(Student::class)->findAll();
+
+
+        return $this->render("student/allStudent.html.twig",array('students' => $students));
     }
 }
 
