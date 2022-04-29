@@ -171,6 +171,26 @@ class StudentController extends AbstractController
           ));
     }
 
+          /** 
+     * @Route("/student/delete/{id}")
+     * @Method({"DELETE"})
+     */
+    public function delete(ManagerRegistry $doctrine, Request $request, int $id)
+    {
+
+      // get driving instructor
+      $student = $doctrine->getRepository(Student::class)->find($id);
+
+
+      $entityManager = $doctrine->getManager();
+      $entityManager->remove($student);
+      $entityManager->flush();
+
+      $response = new Response();
+      $response->send();
+
+    }
+
     
 }
 
