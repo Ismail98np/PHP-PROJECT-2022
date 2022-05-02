@@ -98,3 +98,7 @@ establishing the relationships like this allowed me to ensure that the student a
 * **4.Implement CRUD for remaning entities**
 
 Repeating the steps in to add functionailty dor the driving instructor I repeated this for the student an dlesson objects 
+
+* **5.Create start up fixture for entities**
+
+I then created a fixture which would allow me to load the databasw with informtaion quickly
