@@ -10,6 +10,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\NumberType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\HttpFoundation\Request;
 
 use App\Entity\Lesson;
@@ -54,6 +55,7 @@ class LessonController extends AbstractController
 
 
         $lesson->setLocation('Tallaght');
+        $lesson->setTime('10pm');
         $lesson->setDate('01/05/22');
         $lesson->setPrice(45);
         $lesson->setDrivingInstructor($instructor);
@@ -123,45 +125,54 @@ class LessonController extends AbstractController
     {
         
         $form = $this->createFormBuilder()
-        ->add('location', TextType::class, array('attr' => array('class' => 'form-control')))
+        ->add('location',TextType::class, array('attr' => array('class' => 'form-control')))
         ->add('date', TextType::class, array('attr' => array('class' => 'form-control')))
         ->add('time', TextType::class, array('attr' => array('class' => 'form-control')))
-        ->add('Student Email', TextType::class, array('attr' => array('class' => 'form-control')))
-        ->add('Instructor Email', TextType::class, array('attr' => array('class' => 'form-control')))
+        ->add('Student_Email', TextType::class, array('attr' => array('class' => 'form-control')))
+        ->add('Instructor_Email', TextType::class, array('attr' => array('class' => 'form-control')))
         ->add('save', SubmitType::class, array(
           'label' => 'Create',
           'attr' => array('class' => 'btn btn-primary mt-3')
         ))
         ->getForm();
-
-        //Find Instructor by email
-        //Find student by email
-        ///create lesson with details and link to instructor and student objects
-        //persist to db
-        //return to view all lessons
-
+    
 
         $form->handleRequest($request);
 
+
+
         if($form->isSubmitted() && $form->isValid()) {
           $form_data = $form->getData();
-          $student = new Student();
-          $student->setName($form_data["name"]);
-          $student->setEmail($form_data["email"]);
-          $student->setPhone($form_data["Phone"]);
+
+        //Find Instructor by email
+        $instrcutor = $doctrine->getRepository(DrivingInstructor::class)->findOneBy(array('email' => $form_data["Instructor_Email"]));
+
+        //Find student by email
+        $student = $doctrine->getRepository(Student::class)->findOneBy(array('email' => $form_data["Student_Email"]));
 
 
-          $entityManager = $doctrine->getManager();
-          $entityManager->persist($student);
-          $entityManager->flush();
+        ///create lesson with details and link to instructor and student objects
+        $lesson = new Lesson();
+        $lesson->setLocation($form_data["location"]);
+        $lesson->setTime($form_data["time"]);
+        $lesson->setDate($form_data["date"]);
+        $lesson->setPrice(45);
+        $lesson->setDrivingInstructor($instrcutor);
+        $lesson->setStudent($student);
 
-          
+
+        //persist to db
+        $entityManager = $doctrine->getManager();
+        $entityManager->persist($lesson);
+        $entityManager->flush();
+
+        //return to view all lessons
           return $this->redirectToRoute('viewLessons');
         }
 
         
 
-        return $this->render('lessons/new.html.twig', array(
+        return $this->render('lesson/new.html.twig', array(
             'form' => $form->createView()
           ));
     }
@@ -177,7 +188,7 @@ class LessonController extends AbstractController
 
         
       $form = $this->createFormBuilder($lesson)
-      ->add('location', TextType::class, array('attr' => array('class' => 'form-control')))
+      ->add('location', ChoiceType::class, array('attr' => array('class' => 'form-control')))
       ->add('date', TextType::class, array('attr' => array('class' => 'form-control')))
       ->add('time', TextType::class, array('attr' => array('class' => 'form-control')))
       ->add('save', SubmitType::class, array(
