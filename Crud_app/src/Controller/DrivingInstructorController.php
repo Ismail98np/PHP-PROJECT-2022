@@ -71,8 +71,8 @@ class DrivingInstructorController extends AbstractController
         $instructor = new DrivingInstructor();
 
         //Setting object fields
-        $instructor->setName('Ismail Omotoso 2');
-        $instructor->setEmail('IO@gmail.com');
+        $instructor->setName('jiM Omotoso 2');
+        $instructor->setEmail('JO@gmail.com');
         $instructor->setPhoneNumber('0123456789');
         $instructor->setExperience(2);
 

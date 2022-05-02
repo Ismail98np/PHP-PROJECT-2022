@@ -44,8 +44,8 @@ class LessonController extends AbstractController
         $student = new Student();
 
         //Setting object fields
-        $instructor->setName('Ismail Omotoso 2');
-        $instructor->setEmail('IO@gmail.com');
+        $instructor->setName('Tom Omotoso 2');
+        $instructor->setEmail('TO@gmail.com');
         $instructor->setPhoneNumber('0123456789');
         $instructor->setExperience(2);
 
@@ -90,13 +90,40 @@ class LessonController extends AbstractController
      * @Route("/viewInstructorLessons", name="viewInstructorLessons")
      * @Method({"GET"})
      */
-    public function viewInstructorLessons(ManagerRegistry $doctrine)
+    public function viewInstructorLessons(ManagerRegistry $doctrine , Request $request)
     {
 
-        $lessons = $doctrine->getRepository(Lesson::class)->findAll();
+        $lessons = [];
+
+        $form = $this->createFormBuilder()
+
+        ->add('Instructor_Email', TextType::class, array('attr' => array('class' => 'form-control')))
+        ->add('search', SubmitType::class, array(
+          'label' => 'Search',
+          'attr' => array('class' => 'btn btn-primary mt-3')
+        ))
+        ->getForm();
+    
+
+        $form->handleRequest($request);
+        
+        if($form->isSubmitted() && $form->isValid()) {
+
+            $form_data = $form->getData();
+            $instrcutorLessons = $doctrine->getRepository(Lesson::class)->findBy(array('DrivingIntsructorEmail' => $form_data["Instructor_Email"]));
+            $lessons = $instrcutorLessons;
 
 
-        return $this->render("lessons/lessonsByInstructor.html.twig",array('lessons' => $lessons));
+            return $this->render('lesson/instructorLessons.html.twig',array(
+                'lessons' => $lessons));
+          }
+
+
+        return $this->render("lesson/lessonsByInstructor.html.twig",array(
+            'lessons' => $lessons,
+            'form' => $form->createView()
+
+        ));
     }
 
     /**
@@ -107,7 +134,6 @@ class LessonController extends AbstractController
     {
 
         $lessons = $doctrine->getRepository(Lesson::class)->findAll();
-
 
         return $this->render("lessons/lessonsByStudent.html.twig",array('lessons' => $lessons));
     }
