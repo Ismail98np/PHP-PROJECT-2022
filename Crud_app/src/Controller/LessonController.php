@@ -130,12 +130,40 @@ class LessonController extends AbstractController
      * @Route("/viewStudentLessons", name="viewStudentLessons")
      * @Method({"GET"})
      */
-    public function viewStudentLessons(ManagerRegistry $doctrine)
+    public function viewStudentLessons(ManagerRegistry $doctrine,Request $request)
     {
 
-        $lessons = $doctrine->getRepository(Lesson::class)->findAll();
+        $lessons = [];
 
-        return $this->render("lessons/lessonsByStudent.html.twig",array('lessons' => $lessons));
+        $form = $this->createFormBuilder()
+
+        ->add('Student_Email', TextType::class, array('attr' => array('class' => 'form-control')))
+        ->add('search', SubmitType::class, array(
+          'label' => 'Search',
+          'attr' => array('class' => 'btn btn-primary mt-3')
+        ))
+        ->getForm();
+    
+
+        $form->handleRequest($request);
+        
+        if($form->isSubmitted() && $form->isValid()) {
+
+            $form_data = $form->getData();
+            $instrcutorLessons = $doctrine->getRepository(Lesson::class)->findBy(array('StudentEmail' => $form_data["Student_Email"]));
+            $lessons = $instrcutorLessons;
+
+
+            return $this->render('lesson/studentLessons.html.twig',array(
+                'lessons' => $lessons));
+          }
+
+
+        return $this->render("lesson/lessonsByStudent.html.twig",array(
+            'lessons' => $lessons,
+            'form' => $form->createView()
+
+        ));
     }
 
 
@@ -212,11 +240,11 @@ class LessonController extends AbstractController
 
         
       $form = $this->createFormBuilder($lesson)
-      ->add('location', ChoiceType::class, array('attr' => array('class' => 'form-control')))
+      ->add('location', TextType::class, array('attr' => array('class' => 'form-control')))
       ->add('date', TextType::class, array('attr' => array('class' => 'form-control')))
       ->add('time', TextType::class, array('attr' => array('class' => 'form-control')))
       ->add('save', SubmitType::class, array(
-        'label' => 'Create',
+        'label' => 'Save Changes',
         'attr' => array('class' => 'btn btn-primary mt-3')
       ))
       ->getForm();
@@ -229,7 +257,7 @@ class LessonController extends AbstractController
           $entityManager = $doctrine->getManager();
           $entityManager->flush();
 
-          return $this->redirectToRoute('edit_lesson');
+          return $this->redirectToRoute('viewLessons');
         }
 
         
@@ -247,11 +275,11 @@ class LessonController extends AbstractController
     {
 
       // get driving instructor
-      $student = $doctrine->getRepository(Lesson::class)->find($id);
+      $lesson = $doctrine->getRepository(Lesson::class)->find($id);
 
 
       $entityManager = $doctrine->getManager();
-      $entityManager->remove($student);
+      $entityManager->remove($lesson);
       $entityManager->flush();
 
       $response = new Response();

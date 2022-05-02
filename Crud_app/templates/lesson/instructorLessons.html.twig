@@ -3,7 +3,7 @@
  {% block title %}All Lessons{% endblock title %}
 
 {% block body %}
-<h1>All Lessons</h1>
+<h1>All Instructor Lessons</h1>
 {% if lessons%}
 <table id="table" class="table table-striped">
     <thead>
@@ -27,7 +27,7 @@
             <td>{{ x.Date }}</td>
             <td>{{ x.Price }}</td>
           <td>
-            <a href="/di/edit/{{x.id}}" class="btn btn-primary">edit</a>
+            <a href="/lesson/edit/{{x.id}}" class="btn btn-primary">edit</a>
             <a href="#" class="btn btn-danger delete-lesson" data-id={{x.id}}>delete</a>
           </td>
           <td>

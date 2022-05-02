@@ -1,0 +1,13 @@
+{%extends 'base.html.twig' %}
+
+ {% block title %}PHP website{% endblock title %}
+
+{% block body %}
+<h1>Find lessons by student email</h1>
+
+{{form_start(form)}}
+{{form_widget(form)}}
+{{form_end(form)}}
+<hr>
+<a href="/lessons">Back</a>
+{% endblock %}
