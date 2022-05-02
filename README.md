@@ -73,11 +73,11 @@ The first thing that I wanted to implement for this project was the basic crud f
 
 The first entity tat i wanted to create was the driving instructor as it was the most basic entity that did not need it's realtionships defined at the start.
 
-This was all done within the **1_CRUD_LESSON** branhc
+This was all done within the **1_CRUD_LESSON** branch
 
 * **2. Static Pages**
 
-The next set of steps was to deliever teh static pages of the application using a default controller class to add some context to the website.
+The next set of steps was to deliever the static pages of the application using a default controller class to add some context to the website.
 
 I created the following static pages:
 
@@ -88,6 +88,13 @@ I created the following static pages:
 
 * **3.Create remaning entities**
 
-Since I had the completed the teh dirivng instructor entity i decided to create the remaining entites, which was student and lesson. i also decided to add a new entity called admin which would act almost as a super user for the application being able to execute Crud operations on every other entity.
+Since I had the completed the the dirivng instructor entity i decided to create the remaining entites, which was student and lesson. Here i established realationships between the entites.
 
-The admin will be created using a fixture seeing as they need to be present in the database before the application is being used by others.
+One Driving instructor can have many lessons (OneToMany)
+One Student can have many lessons (OneToMany)
+
+establishing the relationships like this allowed me to ensure that the student and instructor entites were not depenedant on eachother and are only aware of eachother in the lesson entity.
+
+* **4.Implement CRUD for remaning entities**
+
+Repeating the steps in to add functionailty dor the driving instructor I repeated this for the student an dlesson objects 

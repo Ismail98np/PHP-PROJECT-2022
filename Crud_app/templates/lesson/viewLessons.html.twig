@@ -1,0 +1,49 @@
+{%extends 'base.html.twig' %}
+
+ {% block title %}All Lessons{% endblock title %}
+
+{% block body %}
+<h1>All Lessons</h1>
+{% if lessons%}
+<table id="table" class="table table-striped">
+    <thead>
+      <tr>
+        <th>Student Email</th>
+        <th>Instructor Email</th>
+        <th>Location</th>
+        <th>Time </th>
+        <th>Date</th>
+        <th>Price</th>
+        <th>Action</th>
+      </tr>
+    </thead>
+    <tbody>
+        {% for x in lessons %}
+        <tr>
+            <td>{{ x.studentemail }}</td>
+            <td>{{ x.drivingintsructoremail }}</td>
+            <td>{{ x.location }}</td>
+            <td>{{ x.time }}</td>
+            <td>{{ x.Date }}</td>
+            <td>{{ x.Price }}</td>
+          <td>
+            <a href="/lesson/edit/{{x.id}}" class="btn btn-primary">edit</a>
+            <a href="#" class="btn btn-danger delete-lesson" data-id={{x.id}}>delete</a>
+          </td>
+          <td>
+
+          </td>
+        </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+  <a href="/lessons" class="btn btn-info vertical-center" role="button">Go Back</a>
+{% else %}
+  <p>No instrutors to display</p>
+  <a href="/lessons" class="btn btn-info vertical-center" role="button">Go Back</a>
+{% endif %}
+{% endblock %}
+
+{%block javascripts%}
+<script src ="/js/lesson.js"></script>
+{% endblock %}

@@ -1,0 +1,93 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello StudentController!{% endblock %}
+
+{% block body %}
+<style>
+    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
+    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
+    .vertical-center {  margin: 100; position:  absolute;left: 50%;}
+
+</style>
+
+<div class="example-wrapper">
+    <h1>Welcome to the Lesson Hub! ✅</h1>
+
+    <br>
+    <h2>What is this used for?</h2>
+
+    <br>
+
+    <p>Using this Hub you have the ability to do th follwing commands on lessons.<p>
+
+    <ul>
+        <li>Create a new lesson.</li>
+        <li>View all lessons.</li>
+        <li>View all lessons for a instructor.</li>
+        <li>View all lessons for a student.</li>
+        <li>Edit lesson details.</li>
+
+    </ul?
+
+
+    <br>
+    </ul>
+
+
+</div>
+
+<div class="container-lg">
+    <div class="row">
+        <div class="col">
+         <div class="card-deck">
+        <div class="card text-white bg-info mb-3" style="max-width: 20rem;">
+            <div class="card-body">
+              <h5 class="card-title">
+              <a href="/createLesson">Create lesson </a>
+            </h5>
+            </div>
+      </div>
+
+      <div class="row">
+        <div class="col">
+         <div class="card-deck">
+        <div class="card text-white bg-success mb-3" style="max-width: 20rem;">
+            <div class="card-body">
+              <h5 class="card-title">
+              <a href="/viewLessons">View all lessons </a>
+            </h5>
+            </div>
+      </div>
+
+      <div class="row">
+        <div class="col">
+         <div class="card-deck">
+        <div class="card text-white bg-danger mb-3" style="max-width: 20rem;">
+            <div class="card-body">
+              <h5 class="card-title">
+              <a href="/viewInstructorLessons">View instructor lessons </a>
+            </h5>
+            </div>
+      </div>
+
+      <div class="row">
+        <div class="col">
+         <div class="card-deck">
+        <div class="card text-white bg-active mb-3" style="max-width: 20rem;">
+            <div class="card-body">
+              <h5 class="card-title">
+              <a href="/viewStudentLessons">View student lessons </a>
+            </h5>
+            </div>
+      </div>
+
+    </div>
+    <div class="container-lg">
+    <a href="/" class="btn btn-info vertical-center" role="button">Home</a>
+</div>
+
+
+
+
+
+{% endblock %}
