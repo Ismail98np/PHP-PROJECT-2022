@@ -138,9 +138,9 @@ class StudentController extends AbstractController
     public function editStudent(ManagerRegistry $doctrine, Request $request , int $id)
     {
         
-      $driving_instructor = $doctrine->getRepository(Student::class)->find($id);
+      $student = $doctrine->getRepository(Student::class)->find($id);
 
-        $form = $this->createFormBuilder($driving_instructor)
+        $form = $this->createFormBuilder($student)
         ->add('name', TextType::class, array('attr' => array('class' => 'form-control')))
         ->add('email', TextType::class, array(
           'required' => false,

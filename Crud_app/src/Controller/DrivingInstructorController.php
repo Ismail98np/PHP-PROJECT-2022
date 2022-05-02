@@ -25,10 +25,6 @@ class DrivingInstructorController extends AbstractController
     public function index(ManagerRegistry $doctrine)
     {
 
-        // array of driving instructors
-        $driving_instructors = $doctrine->getRepository(DrivingInstructor::class)->findAll();
-
-
         return $this->render("DI/home.html.twig",);
     }
 
