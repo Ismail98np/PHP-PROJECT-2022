@@ -141,9 +141,10 @@ After you have done this you can proceed to run 3 command which will help set up
 
 MAKE SURE YOU ARE IN THE CRUD_APP FOLDER.
 
-1. **php bin/console doctrine:migrations:diff** - Generate a migration by comparing your current database to your mapping information.
-2. **php bin/console doctrine:migrations:migrate** -Execute a migration to a specified version or the latest available version.
-3. **php bin/console doctrine:fixtures:load** - Load data fixtures to your database
+1. **php bin/console doctrine:database:create** - Create database.
+2. **php bin/console doctrine:migrations:diff** - Generate a migration by comparing your current database to your mapping information.
+3. **php bin/console doctrine:migrations:migrate** -Execute a migration to a specified version or the latest available version.
+4. **php bin/console doctrine:fixtures:load** - Load data fixtures to your database
 
 * **4. Run Server and navigate to localhost**
 
