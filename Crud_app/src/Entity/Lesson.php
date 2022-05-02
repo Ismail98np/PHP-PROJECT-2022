@@ -31,6 +31,12 @@ class Lesson
     #[ORM\ManyToOne(targetEntity: Student::class, inversedBy: 'lesson')]
     private $student;
 
+    #[ORM\Column(type: 'string', length: 255, nullable: true)]
+    private $DrivingIntsructorEmail;
+
+    #[ORM\Column(type: 'string', length: 255, nullable: true)]
+    private $StudentEmail;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -104,6 +110,30 @@ class Lesson
     public function setStudent(?Student $student): self
     {
         $this->student = $student;
+
+        return $this;
+    }
+
+    public function getDrivingIntsructorEmail(): ?string
+    {
+        return $this->DrivingIntsructorEmail;
+    }
+
+    public function setDrivingIntsructorEmail(?string $DrivingIntsructorEmail): self
+    {
+        $this->DrivingIntsructorEmail = $DrivingIntsructorEmail;
+
+        return $this;
+    }
+
+    public function getStudentEmail(): ?string
+    {
+        return $this->StudentEmail;
+    }
+
+    public function setStudentEmail(?string $StudentEmail): self
+    {
+        $this->StudentEmail = $StudentEmail;
 
         return $this;
     }

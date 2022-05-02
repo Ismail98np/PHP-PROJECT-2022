@@ -61,9 +61,6 @@ class LessonController extends AbstractController
         $lesson->setDrivingInstructor($instructor);
         $lesson->setStudent($student);
 
-        
-
-
         //Persist to DB
         $entityManager->persist($lesson);
         $entityManager->persist($student);
@@ -86,8 +83,7 @@ class LessonController extends AbstractController
 
         $lessons = $doctrine->getRepository(Lesson::class)->findAll();
 
-
-        return $this->render("lessons/viewLessons.html.twig",array('lessons' => $lessons));
+        return $this->render("lesson/viewLessons.html.twig",array('lessons' => $lessons));
     }
 
     /**
@@ -158,7 +154,9 @@ class LessonController extends AbstractController
         $lesson->setDate($form_data["date"]);
         $lesson->setPrice(45);
         $lesson->setDrivingInstructor($instrcutor);
+        $lesson->setDrivingIntsructorEmail($instrcutor->getEmail());
         $lesson->setStudent($student);
+        $lesson->setStudentEmail($student->getEmail());
 
 
         //persist to db
