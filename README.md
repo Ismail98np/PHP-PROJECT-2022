@@ -73,11 +73,11 @@ The first thing that I wanted to implement for this project was the basic crud f
 
 The first entity tat i wanted to create was the driving instructor as it was the most basic entity that did not need it's realtionships defined at the start.
 
-This was all done within the **1_CRUD_LESSON** branhc
+This was all done within the **1_CRUD_LESSON** branch
 
 * **2. Static Pages**
 
-The next set of steps was to deliever teh static pages of the application using a default controller class to add some context to the website.
+The next set of steps was to deliever the static pages of the application using a default controller class to add some context to the website.
 
 I created the following static pages:
 
