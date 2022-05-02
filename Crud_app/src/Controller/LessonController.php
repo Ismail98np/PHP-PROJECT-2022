@@ -80,7 +80,7 @@ class LessonController extends AbstractController
      */
     public function viewAllLessons(ManagerRegistry $doctrine)
     {
-
+        //array of lessons
         $lessons = $doctrine->getRepository(Lesson::class)->findAll();
 
         return $this->render("lesson/viewLessons.html.twig",array('lessons' => $lessons));
@@ -93,8 +93,10 @@ class LessonController extends AbstractController
     public function viewInstructorLessons(ManagerRegistry $doctrine , Request $request)
     {
 
+        //placeholder for array of lessons
         $lessons = [];
 
+        //create a form which looks for the instructor email only 
         $form = $this->createFormBuilder()
 
         ->add('Instructor_Email', TextType::class, array('attr' => array('class' => 'form-control')))
@@ -106,19 +108,22 @@ class LessonController extends AbstractController
     
 
         $form->handleRequest($request);
+
+        //if the form is valid
         
         if($form->isSubmitted() && $form->isValid()) {
 
             $form_data = $form->getData();
+            //searches in the database for all lessons that match the email that was input in the form 
             $instrcutorLessons = $doctrine->getRepository(Lesson::class)->findBy(array('DrivingIntsructorEmail' => $form_data["Instructor_Email"]));
             $lessons = $instrcutorLessons;
 
-
+            //renders correct page
             return $this->render('lesson/instructorLessons.html.twig',array(
                 'lessons' => $lessons));
           }
 
-
+        //passes in lessons and form for rendering
         return $this->render("lesson/lessonsByInstructor.html.twig",array(
             'lessons' => $lessons,
             'form' => $form->createView()
@@ -126,6 +131,7 @@ class LessonController extends AbstractController
         ));
     }
 
+    // SAME APPROACH AS ABOVE
     /**
      * @Route("/viewStudentLessons", name="viewStudentLessons")
      * @Method({"GET"})
@@ -173,7 +179,7 @@ class LessonController extends AbstractController
      */
     public function newLesson(ManagerRegistry $doctrine, Request $request)
     {
-        
+        //create a form which get needed information for the lessons object
         $form = $this->createFormBuilder()
         ->add('location',TextType::class, array('attr' => array('class' => 'form-control')))
         ->add('date', TextType::class, array('attr' => array('class' => 'form-control')))
@@ -229,6 +235,7 @@ class LessonController extends AbstractController
           ));
     }
 
+    //SAME AS ABOVE
     /** 
      * @Route("/lesson/edit/{id}", name="edit_lesson")
      * @Method({"GET","POST"})
@@ -274,12 +281,14 @@ class LessonController extends AbstractController
     public function delete(ManagerRegistry $doctrine, Request $request, int $id)
     {
 
-      // get driving instructor
+      // get lesson by id
       $lesson = $doctrine->getRepository(Lesson::class)->find($id);
 
 
       $entityManager = $doctrine->getManager();
+      //remove lesson
       $entityManager->remove($lesson);
+      //delete lesson
       $entityManager->flush();
 
       $response = new Response();

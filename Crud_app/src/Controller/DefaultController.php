@@ -9,6 +9,9 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 
 class DefaultController extends AbstractController
 {
+
+    //each method renders a static page
+
     /**
      * @Route("/", name="default")
      * @Method({"GET"})

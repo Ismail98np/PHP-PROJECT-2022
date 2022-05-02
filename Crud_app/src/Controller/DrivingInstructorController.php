@@ -35,8 +35,6 @@ class DrivingInstructorController extends AbstractController
      */
     public function index1(ManagerRegistry $doctrine)
     {
-        //return new Response("<html><body>this webpage is working fine</body></html>");
-
         // array of driving instructors
         $driving_instructors = $doctrine->getRepository(DrivingInstructor::class)->findAll();
 
@@ -94,7 +92,7 @@ class DrivingInstructorController extends AbstractController
     public function newInstructor(ManagerRegistry $doctrine, Request $request)
     {
         
-
+      //Using form builder from symfony I pass in the fields needed to create the driving inxtructor object
         $form = $this->createFormBuilder()
         ->add('name', TextType::class, array('attr' => array('class' => 'form-control')))
         ->add('email', TextType::class, array(
@@ -110,42 +108,45 @@ class DrivingInstructorController extends AbstractController
         ->getForm();
 
 
+        //form handles the request
         $form->handleRequest($request);
 
+        //if the information provided is valid then a driving instructor is created
         if($form->isSubmitted() && $form->isValid()) {
+          //gets data entered into form
           $form_data = $form->getData();
+          //creates driving instructor
           $instructor = new DrivingInstructor();
           $instructor->setName($form_data["name"]);
           $instructor->setEmail($form_data["email"]);
           $instructor->setPhoneNumber($form_data["Phone"]);
           $instructor->setExperience($form_data["Experience"]);
 
-
+          //get manager
           $entityManager = $doctrine->getManager();
+          //persist object to db
           $entityManager->persist($instructor);
+          //execute query
           $entityManager->flush();
-
+          //redirect to correct page
           return $this->redirectToRoute('home');
         }
 
         
-
+        //pass in the form into this page which will render it for use
         return $this->render('DI/new.html.twig', array(
             'form' => $form->createView()
           ));
     }
 
-                /**
+     /**
      * @Route("/editInstructors", name="editInstructors")
      * @Method({"GET"})
      */
     public function editStudents(ManagerRegistry $doctrine)
     {
-       
-
         // array of driving instructors
         $driving_instructor = $doctrine->getRepository(DrivingInstructor::class)->findAll();
-
 
         return $this->render("DI/editInstructors.html.twig",array('instructors' => $driving_instructor));
     }
@@ -157,7 +158,7 @@ class DrivingInstructorController extends AbstractController
      */
     public function editInstructor(ManagerRegistry $doctrine, Request $request , int $id)
     {
-        
+      //Follows the same approach as new instuctor
       $driving_instructor = $doctrine->getRepository(DrivingInstructor::class)->find($id);
 
         $form = $this->createFormBuilder($driving_instructor)
@@ -205,9 +206,12 @@ class DrivingInstructorController extends AbstractController
 
 
       $entityManager = $doctrine->getManager();
+      //remove driving instructor
       $entityManager->remove($driving_instructor);
+      //execute query
       $entityManager->flush();
 
+      //response is sent back to fetch
       $response = new Response();
       $response->send();
 
