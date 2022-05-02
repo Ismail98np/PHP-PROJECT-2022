@@ -24,7 +24,7 @@ class LessonController extends AbstractController
      */
     public function index(ManagerRegistry $doctrine)
     {
-        return $this->render("lessons/index.html.twig",);
+        return $this->render("lesson/index.html.twig",);
     }
 
 
