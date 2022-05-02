@@ -102,3 +102,63 @@ Repeating the steps in to add functionailty dor the driving instructor I repeate
 * **5.Create start up fixture for entities**
 
 I then created a fixture which would allow me to load the databasw with informtaion quickly
+
+# Run website
+
+* **1.Clone project**
+
+Clone repository locally by using the git clone command:
+
+`git clone https://github.com/Ismail98np/PHP-PROJECT-2022.git`
+
+* **2. Install dependencies**
+
+There are a number of dependencies for this project that are needed to ensure that it runs successfully.
+
+You must install the following:
+
+* Symfony
+* Composer
+* MySQL
+* MySQL Workbench (useful for debugging)
+
+You need to ensure that you have all the necessary packages for this project to work. To do this you need to run the following command
+
+`composer install`
+
+Composer will then install all the necessary packages for this project 
+
+* **3. Configure Database**
+
+To configure the database you will need to ensure that you have a database in MySQL and you will also need to confifure the .env file in the project to use the credentials for this local instance of the database by editing the `DATABASE_URL` field.
+
+<p align="center">
+<img src="readMe_images/db.png" width="500">
+<p>
+
+
+After you have done this you can proceed to run 3 command which will help set up the database.
+
+MAKE SURE YOU ARE IN THE CRUD_APP FOLDER.
+
+1. **php bin/console doctrine:migrations:diff** - Generate a migration by comparing your current database to your mapping information.
+2. **php bin/console doctrine:migrations:migrate** -Execute a migration to a specified version or the latest available version.
+3. **php bin/console doctrine:fixtures:load** - Load data fixtures to your database
+
+* **4. Run Server and navigate to localhost**
+
+Run the following command
+
+`symfony serve`
+
+This should start the server and you can then open up localhost:8080 in your browser.
+
+<p align="center">
+<img src="readMe_images/wb.png" width="500">
+<p>
+
+This should bring you to the home page of the project.
+
+<p align="center">
+<img src="readMe_images/home.png" width="500">
+<p>
